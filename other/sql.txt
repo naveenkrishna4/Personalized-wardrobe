@@ -1,0 +1,2 @@
+create database wardrobe;
+create table users(id BIGINT not null auto_increment primary key,name varchar(255),email varchar(255),password varchar(255),gender char(1));

@@ -1,0 +1,25 @@
+/* Bootstrap error fix */
+html,
+body {
+  overflow-x: hidden;
+}
+
+.error-div{
+    color: red;
+    text-align: center;
+}
+
+.success-div{
+    color: green;
+    text-align: center;
+}
+
+.myBorder {
+    /* Instagram border */
+    border: 1px solid rgba(var(--b6a, 219, 219, 219), 1) !important;
+    background-color: white;
+  }
+
+  .btn{
+    width: 100%;
+  }

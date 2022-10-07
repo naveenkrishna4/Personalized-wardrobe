@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
+*{
+    font-family: "Roboto Slab",sans-serif;
+}
+body{
+    margin: 0px;
+    background-color: #fbecec
+}
+.header{
+    color: black;
+    display: flex;
+    position: absolute;
+}
+.logo{
+    
+    padding: 1.5rem;
+    margin: 0px;
+}
+.header{
+    border-bottom: 0.5rem solid;
+    display: grid;
+    grid-template-columns: 10fr 1fr 1fr;
+}
+.nav-link{
+    padding: 2rem;
+    font-weight: bold;
+    
+    text-decoration: none;
+}
+.nav-link:hover{
+    color:#e11d74;
+}
+.weather-column{
+    width: 25%;
+    float: left
+}
+.heading{
+    color: #e11d74;
+    margin:1.2rem;
+}
+.news-container{
+    width:36rem;
+    border: 0.1rem solid #91d18b;
+    border-radius: 0.4rem;
+    padding: 1rem;
+    margin: auto;
+    margin-top: 16%;
+    margin-bottom: 1rem;
+    display: flex;
+    position: absolute;
+    justify-content: center;
+}
+.content{
+    border: 0.1rem solid #91d18b;
+    border-radius: 0.4rem;
+    padding-left:1.2rem;
+    padding-right:1.2rem;
+    margin:1.2rem;
+    position: absolute;
+}
+.image{
+    opacity: 0.6;
+    width: 100%;
+    height: 100%;
+}
+
+.justify{
+    justify-content: center !important;
+}
+
+.mymargintop{
+    margin-top: 500px;
+}
+
+body{
+    background-image: url("../images/wardrobe1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover
+}
