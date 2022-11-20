@@ -1,2 +1,32 @@
 create database wardrobe;
 create table users(id BIGINT not null auto_increment primary key,name varchar(255),email varchar(255),password varchar(255),gender char(1));
+
+
+create table color(id BIGINT not null auto_increment primary key,name varchar(255));
+
+create table type(id BIGINT not null auto_increment primary key,name varchar(255));
+
+create table cloth(id BIGINT not null auto_increment primary key,name varchar(255));
+
+create table user_input(id BIGINT not null auto_increment primary key,color_id BIGINT,type_id BIGINT,cloth_id BIGINT,foreign key(color_id) references color(id),foreign key(type_id) references type(id),foreign key(cloth_id) references cloth(id));
+
+
+create table combination(id BIGINT not null auto_increment primary key,color_id BIGINT not null,matching_color_id BIGINT not null,foreign key(color_id) references color(id),foreign key(matching_color_id) references color(id));
+
+
+insert into color(name) values('red');
+
+insert into color(name) values('blue');
+
+insert into color(name) values('green');
+
+insert into color(name) values('black');
+
+insert into combination(color_id,matching_color_id) values(1,4);
+insert into combination(color_id,matching_color_id) values(1,2);
+insert into combination(color_id,matching_color_id) values(2,4);
+insert into combination(color_id,matching_color_id) values(2,3);
+insert into combination(color_id,matching_color_id) values(3,4);
+insert into combination(color_id,matching_color_id) values(3,1);
+insert into combination(color_id,matching_color_id) values(4,1);
+insert into combination(color_id,matching_color_id) values(4,3);

@@ -11,8 +11,8 @@
         </div>
         <div class="nav">
             <div ><a href="signup.php" class="nav-item">Signup</a></div>
-            <div class="nav-item">Login</div>
-            <div class="nav-item">Rate us</div>
+            <div><a href="login.php" class="nav-item">Login</a></div>
+            <div><a href="rating.php" class="nav-item">Rate us</a></div>
             <div class="nav-item">Top matchups</div>
             <div class="nav-item">About us</div>
         </div>

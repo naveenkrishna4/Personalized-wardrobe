@@ -1,21 +1,15 @@
 <?php 
 session_start();
-require_once "pdo.php";
+include('connection.php');
 //checking for post method
 if(isset($_POST["email"] )){
 
    
     $email=trim($_POST["email"]);
     $password=$_POST["password"];
-    $name=$_POST["name"];
 
 
-    if(!isset($_POST["gender"])){
-        $_SESSION["error"]="Gender is required";
-    }
-    else{
 
-    $gender=$_POST["gender"];
 
     if(strlen($email)>=1){
         if(strpos($email,'@')==false){
@@ -29,18 +23,21 @@ if(isset($_POST["email"] )){
                 else{
                     //DATABASE CONNECTIVITY
                     #$_SESSION["success"]="Success";
-                    $sql="insert into users(name,email,password,gender) values(:name,:email,:password,:gender)";
-
-                    $stmnt=$pdo->prepare($sql);
-                    $stmnt->execute(array(
-                    ':name'=>htmlentities($name),
-                    ':email'=>htmlentities($email),
-                    ':password'=>htmlentities($password),
-                    ':gender'=>htmlentities($gender)
-                    )
-                    );
-                    header("Location: landing.php");
-                    return;
+                    $email=stripcslashes($email);
+                    $password=stripcslashes($password);
+                    $email=mysqli_real_escape_string($con,$email);
+                    $password=mysqli_real_escape_string($con,$password);
+                    $sql="select * from users where email='$email' and password='$password'";
+                    $result=mysqli_query($con,$sql);
+                    $row=mysqli_fetch_array($result,MYSQLI_ASSOC);
+                    $count=mysqli_num_rows($result);
+                    if($count==1){
+                        header("Location: landing.php");
+                        return;
+                    }
+                    else{
+                        $_SESSION["error"]="Invalid email or password";
+                    }
                 }
 
             }
@@ -53,17 +50,18 @@ if(isset($_POST["email"] )){
         $_SESSION["error"]="Email is required";
     }
 
-    }
+    
 
 
 
 
     #if(isset($_SESSION["error"])){
-        #$_SESSION["success"] = "";
+       #$_SESSION["success"] = "";
     #}
 
 
-}else{
+}
+else{
     $_SESSION["error"]=" ";
 }
 
@@ -97,8 +95,8 @@ if(isset($_POST["email"] )){
         
         <div class="header mb-5 myBorder">
             <h1 class="logo">Personalised WARDROBE</h1>
-            <a class="nav-link" href="login.php">Login</a>
-            <a class="nav-link" href="#">Signup</a>
+            <a class="nav-link" href="#">Login</a>
+            <a class="nav-link" href=signup.php>Signup</a>
         </div>
         <div class="justify">
 
@@ -111,12 +109,9 @@ if(isset($_POST["email"] )){
                         
                         <form method="post" class=" myBorder p-5 shadow mb-5">
                         <div>
-                            <h1 class="text-center">SIGNUP</h1>
+                            <h1 class="text-center">Login</h1>
                         </div>
-                            <div class="py-3">
-                                <label for="name">NAME:</label>
-                                <input type="text" placeholder="ENTER NAME" VALUE="" id="name" name="name" required autocapitalize="words" autofocus ><br>
-                            </div>
+                            
                             <div class="py-3">
                                 <label for="email">MAIL ID:</label>
                                 <input type="text" placeholder="ENTER MAIL ID" VALUE="" id="email" name="email" inputmode="email">
@@ -125,14 +120,8 @@ if(isset($_POST["email"] )){
                                 <label for="password">PASSWORD:</label>
                                 <input type="password" placeholder="ENTER PASSWORD" id="password" name="password">
                             </p>
-                            <div class="py-3">
-                                Gender:
-                                <input type="radio" name="gender" id="male" value="m">
-                                <label for="male">Male</label>
-                                <input type="radio" name="gender" id="female" value="f">
-                                <label for="female">Female</label>
-                            </div>
-                            <input type="submit" class="btn btn-primary" value="Sign up">
+                            
+                            <input type="submit" class="btn btn-primary" value="Login">
                             <?php
 
                             if(isset($_SESSION["error"])){
@@ -140,7 +129,7 @@ if(isset($_POST["email"] )){
                             }
 
                             #if(isset($_SESSION["success"])){
-                                #echo "<p class='success-div'>".$_SESSION["success"]."</p>";
+                               #echo "<p class='success-div'>".$_SESSION["success"]."</p>";
                             #}
                                 
                             
