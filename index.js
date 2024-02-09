@@ -80,6 +80,7 @@ app.post('/check', async (req, res) => {
     app.get('/result', async (req, res) => {
         try {
           const out = await det.find({$and: [{type: dresstype},{source: value}]});
+          console.log(out);
           if (out!==null) {
             let responseHtml = `<!doctype html>
             <html>
